@@ -6,7 +6,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SCRIPTS_DIR="$REPO_ROOT/src/ui-ux-pro-max/scripts"
 SEARCH="$SCRIPTS_DIR/search.py"
 QUERY="${1:-dashboard performance button typography chart icon animation}" 
-EXPECTED_COUNT="${EXPECTED_DOMAIN_COUNT:-12}"
+EXPECTED_COUNT="${EXPECTED_DOMAIN_COUNT:-13}"
 
 if [ ! -f "$SEARCH" ]; then
   echo "FAIL: search.py not found at $SEARCH" >&2

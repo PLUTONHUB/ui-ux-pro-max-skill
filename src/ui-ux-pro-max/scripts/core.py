@@ -74,6 +74,11 @@ CSV_CONFIG = {
         "file": "google-fonts.csv",
         "search_cols": ["Family", "Category", "Stroke", "Classifications", "Keywords", "Subsets", "Designers"],
         "output_cols": ["Family", "Category", "Stroke", "Classifications", "Styles", "Variable Axes", "Subsets", "Designers", "Popularity Rank", "Google Fonts URL"]
+    },
+    "resources": {
+        "file": "resources.csv",
+        "search_cols": ["Category", "Resource", "Keywords", "Type", "Best For"],
+        "output_cols": ["Category", "Resource", "Type", "License", "Cost", "URL", "Install", "Best For", "Watch Out", "Pairs With"]
     }
 }
 
@@ -83,6 +88,9 @@ UNTRUNCATED_COLS = {
     "Code Example Good", "Code Example Bad", "Code Good", "Code Bad",
     "Implementation Checklist", "Design System Variables", "CSS Import",
     "Tailwind Config", "GSAP Snippet",
+    # A truncated install command or URL is worse than none -- it looks
+    # runnable and isn't.
+    "Install", "URL", "License",
 }
 
 STACK_CONFIG = {
@@ -361,16 +369,34 @@ def _domain_keywords():
         "icons": ["icon", "icons", "lucide", "heroicons", "symbol", "glyph", "pictogram", "svg icon"],
         "gsap": ["gsap", "quickto", "scrolltrigger", "stagger", "magnetic cursor", "parallax", "page transition", "scroll reveal", "scroll-triggered", "scrollytelling", "flip plugin", "splittext", "shimmer", "skeleton loader"],
         "react": ["react", "next.js", "nextjs", "suspense", "memo", "usecallback", "useeffect", "rerender", "bundle", "waterfall", "barrel", "dynamic import", "rsc", "server component"],
-        "web": ["aria", "focus", "outline", "semantic", "virtualize", "autocomplete", "form", "input type", "preconnect"]
+        "web": ["aria", "focus", "outline", "semantic", "virtualize", "autocomplete", "form", "input type", "preconnect"],
+        # Deliberately phrase-heavy. Single generic words ("library",
+        # "template", "free") would hijack queries that belong to style/gsap/
+        # icons, so almost every entry here is two words or a proper noun.
+        "resources": [
+            "component library", "ui library", "ui kit", "animation library", "icon library",
+            "motion library", "illustration library", "which library", "what library",
+            "recommend a library", "website template", "site template", "free template",
+            "starter template", "landing page template", "boilerplate", "starter kit",
+            "open source", "mit license", "license", "commercially free", "free for commercial use",
+            "agent skill", "claude skill", "mcp server", "design skill", "skill for design",
+            "stock photos", "stock video", "free fonts", "font library", "design tool",
+            "motion graphics", "lottie", "rive", "spline", "theatre.js", "lenis",
+            "shadcn", "magic ui", "aceternity", "hyperui", "flowbite", "daisyui", "preline",
+            "radix", "tailark", "astrowind", "iconify", "fontshare", "undraw", "unsplash",
+            "pexels", "haikei", "mobbin", "inspiration gallery", "design inspiration",
+        ],
     }
     return _DOMAIN_KEYWORDS
 
 
 # Domains checked in this fixed order when scores tie, so results are
 # deterministic instead of depending on dict/hash ordering.
+# "resources" sits last on purpose: it indexes tool names that also appear
+# in style/gsap/icons queries, and on a tie the more specific domain should win.
 _DOMAIN_TIEBREAK_ORDER = [
     "ux", "product", "style", "color", "typography", "google-fonts",
-    "chart", "landing", "icons", "gsap", "react", "web",
+    "chart", "landing", "icons", "gsap", "react", "web", "resources",
 ]
 
 

@@ -25,6 +25,7 @@ python3 src/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain> [-n <max
 - `web` - App interface guidelines (iOS/Android/React Native)
 - `google-fonts` - Individual Google Fonts lookup
 - `gsap` - GSAP animation skeletons by intensity tier (hover, scroll reveal, stagger, page transition, parallax, loading)
+- `resources` - Free design tools, component libraries, motion libraries, templates, asset sources and agent skills, each with license, cost, install command and the catch to watch for
 
 **Design dials (optional, only with `--design-system`):**
 ```bash
