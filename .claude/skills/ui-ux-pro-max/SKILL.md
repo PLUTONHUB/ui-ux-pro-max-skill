@@ -133,6 +133,7 @@ python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "<
 | GSAP animation presets | `gsap` | `--domain gsap "scroll reveal stagger"` |
 | React/Next.js performance | `react` | `--domain react "rerender memo list"` |
 | App/native interface guidelines | `web` | `--domain web "accessibilityLabel touch safe-areas"` |
+| Free tools, libraries, templates | `resources` | `--domain resources "free animation library"` |
 
 Domain is auto-detected from the query if `--domain` is omitted — but auto-detection can misroute overlapping terms (e.g. "font" matches both `typography` and `google-fonts`). If results look off-topic, pass `--domain` explicitly.
 

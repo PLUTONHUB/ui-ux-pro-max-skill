@@ -74,6 +74,16 @@ class TestSearchDomains(unittest.TestCase):
                 result = search_stack("performance", stack, max_results=1)
                 self.assertNotIn("error", result, f"stack '{stack}' failed: {result.get('error')}")
 
+    def test_resources_rows_carry_a_usable_url(self):
+        """A resource recommendation without a link is a dead end -- every row
+        the resources domain can return must ship one."""
+        result = search("animation component library icons fonts", domain="resources", max_results=10)
+        self.assertGreater(result["count"], 0)
+        for row in result["results"]:
+            self.assertTrue(row.get("URL", "").startswith("https://"),
+                            f"resource '{row.get('Resource')}' has no usable URL")
+            self.assertTrue(row.get("License"), f"resource '{row.get('Resource')}' has no license")
+
 
 class TestDomainDetection(unittest.TestCase):
     def test_style_keywords_route_to_style(self):
@@ -90,6 +100,18 @@ class TestDomainDetection(unittest.TestCase):
 
     def test_empty_query_falls_back_to_style(self):
         self.assertEqual(detect_domain("...!!!???"), "style")
+
+    def test_tooling_questions_route_to_resources(self):
+        self.assertEqual(detect_domain("best free animation library"), "resources")
+        self.assertEqual(detect_domain("free website template"), "resources")
+        self.assertEqual(detect_domain("mcp server for design"), "resources")
+
+    def test_resources_keywords_do_not_hijack_specific_domains(self):
+        """resources indexes tool names that also appear in style/gsap/icons
+        queries; on a tie the more specific domain must still win."""
+        self.assertEqual(detect_domain("scroll reveal gsap stagger"), "gsap")
+        self.assertEqual(detect_domain("icon for settings"), "icons")
+        self.assertEqual(detect_domain("accessibility contrast wcag"), "ux")
 
 
 class TestPersistence(unittest.TestCase):

@@ -149,6 +149,7 @@ python3 skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-n
 | Icon suggestions | `icons` | `--domain icons "navigation arrows"` |
 | Individual Google Fonts | `google-fonts` | `--domain google-fonts "variable sans serif"` |
 | GSAP animation snippets | `gsap` | `--domain gsap "scroll reveal stagger"` |
+| Free tools, libraries, templates | `resources` | `--domain resources "free animation library"` |
 
 ### Step 4: Stack Guidelines
 
@@ -178,6 +179,7 @@ python3 skills/ui-ux-pro-max/scripts/search.py "<keyword>" --stack <stack>
 | `web` | App interface guidelines (iOS/Android/React Native) | accessibilityLabel, touch targets, safe areas, Dynamic Type |
 | `icons` | Icon recommendations with import code | arrow, navigation, lucide, phosphor |
 | `google-fonts` | Individual Google Fonts lookup | sans serif, monospace, japanese, variable font, popular |
+| `resources` | Free design tools, libraries, templates and agent skills — with license, cost, install command and the catch | animation library, component library, free template, stock photos, mcp server, lottie, rive |
 
 ### Available Stacks
 
